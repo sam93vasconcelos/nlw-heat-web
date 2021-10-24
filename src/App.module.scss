@@ -18,3 +18,12 @@
   position: absolute;
   right: -200px;
 }
+
+@media (max-width: 768px) {
+  .contentWrapper {
+    display: block;
+  }
+  .contentSigned::before {
+    display: none;
+  }
+}

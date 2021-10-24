@@ -40,3 +40,21 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .loginBoxWrapper {
+    background: #121214;
+
+    strong {
+      display: none;
+    }
+
+    .signInWithGithub {
+      padding: 0;
+      width: 100%;
+      position: fixed;
+      bottom: 0px;
+      font-size: 12px;
+    }
+  }
+}

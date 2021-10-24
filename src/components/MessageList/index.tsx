@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { io } from 'socket.io-client'
 import { api } from '../../services/api'
 
 import styles from './styles.module.scss'
 
 import logoImg from '../../assets/logo.svg'
+import { AuthContext } from '../../contexts/auth'
 
 type Message = {
   id: string
@@ -25,6 +26,7 @@ socket.on('new_message', newMessage => {
 
 export function MessageList() {
   const [messages, setMessages] = useState<Message[]>([])
+  const { signOut, user } = useContext(AuthContext)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,6 +51,16 @@ export function MessageList() {
   return (
     <div className={styles.messageListWrapper}>
       <img src={logoImg} alt="DoWhile 2021" />
+
+      {user ? <div className={styles.headerWrapper}>
+        <button onClick={ signOut } className={styles.signOutButton}>
+          Sair
+        </button>
+
+        <div className={styles.userImageHeader}>
+          <img src={user?.avatar_url} alt={user?.name} />
+        </div>
+      </div> : ''}
 
       <ul className={styles.messageList}>
         {messages.map(message => 
